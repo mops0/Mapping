@@ -1,7 +1,6 @@
-package com.szymczyszyn.testowe;
+package com.szymczyszyn.mapping;
 
 import java.io.IOException;
-
 public class Main {
 
 	/**
@@ -9,7 +8,8 @@ public class Main {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		Mapping mapping = new Mapping();
+		
+		Mapping mapping = new Mapping(new IO());
 		mapping.init();
 
 	}
