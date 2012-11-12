@@ -1,0 +1,3 @@
+#!/bin/sh
+#cd $JAVA_LIB/
+java -jar $JAVA_LIB/mapping.jar 
