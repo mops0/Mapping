@@ -16,22 +16,31 @@ import com.szymczyszyn.mapping.TextConsole;
 
 public class Mapping2Test {
 
-	TextConsole testConsole;
+	TextConsole mockConsole;
 	Map<String,String> map;
 	Mapping2 mapping;
 	@Before
 	public void setUp() throws Exception {
 	
-		this.testConsole=EasyMock.createMock(TextConsole.class);
+		this.mockConsole=EasyMock.createStrictMock(TextConsole.class);
 		this.map=new HashMap<String,String>();
-		this.mapping=new Mapping2(map,testConsole);
+		this.mapping=new Mapping2(map,mockConsole);
 		
 	}
 	
 	@Test
 	public void test() throws IOException {
 		
-	
+		mockConsole.print(">");
+		EasyMock.expect(mockConsole.readLine()).andReturn("set polska warszawa");
+		mockConsole.print(">");
+		EasyMock.expect(mockConsole.readLine()).andReturn("get polska");
+		mockConsole.printLine("warszawa");
+		mockConsole.print(">");
+		EasyMock.expect(mockConsole.readLine()).andReturn("exit");
+		EasyMock.replay(mockConsole);
+		mapping.init();
+		EasyMock.verify(mockConsole);
 	}
 
 }
