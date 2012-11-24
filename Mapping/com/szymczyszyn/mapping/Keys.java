@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class Keys extends Command{
+public class Keys implements Command{
 
 	Map<String,String> map;
 	TextConsole console;
@@ -25,9 +25,14 @@ public class Keys extends Command{
 		
 	}
 	@Override
-	String getCommandType() {
+	public String getCommandType() {
 		// TODO Auto-generated method stub
 		return "keys";
+	}
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

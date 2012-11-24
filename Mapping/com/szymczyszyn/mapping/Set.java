@@ -2,7 +2,7 @@ package com.szymczyszyn.mapping;
 
 import java.util.Map;
 
-public class Set extends Command{
+public class Set implements Command{
 
 	Map<String,String> map;
 	TextConsole console;
@@ -24,9 +24,18 @@ public class Set extends Command{
 	}
 
 	@Override
-	String getCommandType() {
+	public String getCommandType() {
 		// TODO Auto-generated method stub
 		return "set";
+	}
+
+	@Override
+	public boolean isValid() {
+		if (key!=null && value!=null)
+			
+		return true;
+		else
+		return false;
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.szymczyszyn.mapping;
 
-public class Error extends Command
+public class Error implements Command
 {
 	TextConsole console;
 	Error(TextConsole console){
@@ -12,8 +12,13 @@ public class Error extends Command
 		
 	}
 	@Override
-	String getCommandType() {
+	public String getCommandType() {
 		// TODO Auto-generated method stub
 		return "error";
+	}
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -2,6 +2,9 @@ package com.szymczyszyn.testmapping;
 
 
 
+import static org.junit.Assert.*;
+
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +41,13 @@ public class GetTest {
 		map.put("polska","warszawa");
 		get= new Get("polska",map,mockConsole);
 		get.execute();
-		
 		EasyMock.verify(mockConsole);
 		
+		get= new Get(null,map,mockConsole);
+		assertFalse(get.isValid());
 		
-	
+		get= new Get("polska",map,mockConsole);
+		assertTrue(get.isValid());
 	}
 	
 }

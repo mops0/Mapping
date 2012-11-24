@@ -1,6 +1,6 @@
 package com.szymczyszyn.mapping;
 
-public class Exit extends Command{
+public class Exit implements Command{
 
 	public void execute() {
 	
@@ -8,9 +8,15 @@ public class Exit extends Command{
 	}
 
 	@Override
-	String getCommandType() {
+	public String getCommandType() {
 		// TODO Auto-generated method stub
 		return "exit";
+	}
+
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 }

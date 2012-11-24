@@ -1,46 +1,54 @@
 package com.szymczyszyn.mapping;
 
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class StringParser  {
 	private String key;
 	private String value;
 	private String commandType;
-	protected StringParser()
+	public static StringParser create()
 	{
+		return new StringParser();
 		
 	}
-	protected StringParser(String string)
+	public Command parseString(String string,Map<String,String> map, TextConsole console)
 	{
+		key=null;
+		value=null;
+		commandType=null;
+		
+		
 		StringTokenizer st = new StringTokenizer(string);
+		
 		if(st.hasMoreTokens()) commandType=st.nextToken();
 		if(st.hasMoreTokens()) key=st.nextToken();
-		if(st.hasMoreTokens()) value=st.nextToken();
+		if (st.hasMoreTokens()) value=st.nextToken();
+		return newCommand(map,console);
 	}
-	public void parseString(String string)
+	
+	private Command newCommand(Map<String,String> map, TextConsole console)
 	{
-		StringTokenizer st = new StringTokenizer(string);
-		if(st.hasMoreTokens()) commandType=st.nextToken();
-		if(st.hasMoreTokens()) key=st.nextToken();
-		if(st.hasMoreTokens()) value=st.nextToken();
-	}
-	public String getKey() {
-		return key;
-	}
-	public void setKey(String key) {
-		this.key = key;
-	}
-	public String getValue() {
-		return value;
-	}
-	public void setValue(String value) {
-		this.value = value;
-	}
-	public String getCommandType() {
-		return commandType;
-	}
-	public void setCommandType(String commandType) {
-		this.commandType = commandType;
+		Command command;
+		switch (commandType)
+		{
+			case "set":
+				command=new Set(key,value,map,console);
+			break;
+			case "get":
+				command=new Get(key,map,console);
+			break;	
+			case "keys":
+				command= new Keys(map,console);
+			break;
+			case "exit":
+				command= new Exit();
+			break;
+			default: 
+				return new Error(console);
+		}
+		if (command.isValid()) return command;
+		else return new Error(console);
 	}
 	
 }

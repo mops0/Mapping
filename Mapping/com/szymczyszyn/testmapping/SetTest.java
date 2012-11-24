@@ -39,6 +39,13 @@ public class SetTest {
 		set=new Set("polska","gniezno",map,mockConsole);
 		set.execute();
 		EasyMock.verify(mockConsole);
+		
+		set=new Set("polska",null,map,mockConsole);
+		assertFalse(set.isValid());
+		set=new Set(null,null,map,mockConsole);
+		assertFalse(set.isValid());
+		set=new Set("polska","gniezno",map,mockConsole);
+		assertTrue(set.isValid());
 	}
 
 }

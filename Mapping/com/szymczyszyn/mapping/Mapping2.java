@@ -13,15 +13,16 @@ public class Mapping2 {
 	{
 		this.map=map;
 		this.console=console;
-		parser=StringParserFactory.create();
+		
 	}
 	public void init() throws IOException
 	{
+		parser=StringParser.create();
 		do
 		{
 			console.print(">");
-			parser.parseString(console.readLine());
-			command=Command.newCommand(parser, map, console);
+			command=parser.parseString(console.readLine(),map,console);
+			
 			command.execute();
 		}
 		while(command.getClass()!=Exit.class);
