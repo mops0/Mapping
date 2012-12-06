@@ -7,32 +7,22 @@ import java.util.Set;
 public class Keys implements Command{
 
 	Map<String,String> map;
-	TextConsole console;
 	
-	public Keys(Map<String, String> map, TextConsole console) 
+	
+	public Keys(Map<String, String> map) 
 	{
 		this.map = map;
-		this.console = console;
+		
 	}
-	public void execute() 
+	public String execute() 
 	{
 		Set<String> keys = map.keySet();
 		Iterator<String> iter = keys.iterator();
+		String string="";
 		while(iter.hasNext())
 		{
-			console.printLine(iter.next().toString());
+			string=string+iter.next().toString()+"\n";
 		}
-		
+		return string;
 	}
-	@Override
-	public String getCommandType() {
-		// TODO Auto-generated method stub
-		return "keys";
-	}
-	@Override
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 }

@@ -1,29 +1,44 @@
 package com.szymczyszyn.mapping;
 
 import java.io.IOException;
-import java.util.Map;
+
 
 public class Mapping2 {
 
-	Map<String,String> map;
+	
 	TextConsole console;
 	Command command;
-	StringParser parser;
-	public Mapping2(Map<String,String> map,TextConsole console)
+	CommandFactories commandFactories;
+	
+	
+	public Mapping2(TextConsole console)
 	{
-		this.map=map;
 		this.console=console;
-		
 	}
-	public void init() throws IOException
+	public void init() throws IOException, Exception
 	{
-		parser=StringParser.create();
+		
+		commandFactories=CommandFactories.create();
+		commandFactories.registerFactory(SetFactory.STRING,new SetFactory());
+		commandFactories.registerFactory(GetFactory.STRING,new GetFactory());
+		commandFactories.registerFactory(KeysFactory.STRING,new KeysFactory());
+		commandFactories.registerFactory(ExitFactory.STRING,new ExitFactory());
+		commandFactories.registerFactory(ErrorCommandFactory.STRING,new ErrorCommandFactory());
 		do
 		{
-			console.print(">");
-			command=parser.parseString(console.readLine(),map,console);
-			
-			command.execute();
+			console.print(">");	
+			try
+			{
+				command=commandFactories.getCommand(console.readLine());
+				
+				console.print(command.execute());
+			}
+			catch(Exception e)
+			{
+				System.out.println("Błędne parametry! ");
+				command=commandFactories.getCommand("error");
+				
+			}
 		}
 		while(command.getClass()!=Exit.class);
 	}

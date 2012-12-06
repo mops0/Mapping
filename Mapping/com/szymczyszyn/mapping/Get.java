@@ -5,33 +5,23 @@ import java.util.Map;
 public class Get implements Command{
 
 	Map<String,String> map;
-	TextConsole console;
-	String key;
 	
-	public Get(String key, Map<String, String> map, TextConsole console) 
+	private String key;
+	
+	public Get(String key, Map<String, String> map) throws Exception
 	{
 		this.map = map;
-		this.console = console;
+		
 		this.key = key;
 	}
 
-	@Override
-	public void execute() {
-		if (map.containsKey(key)) console.printLine(map.get(key));
-		
+	
+	public String execute() {
+		if (map.containsKey(key)) return map.get(key)+"\n";
+		else	return "";
 	}
 
-	@Override
-	public String getCommandType() {
-		// TODO Auto-generated method stub
-		return "get";
-	}
-
-	@Override
-	public boolean isValid() {
-		if (key!=null) return true;
-		else
-		return false;
-	}
+	
+	
 	
 }
